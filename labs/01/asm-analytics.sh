@@ -35,4 +35,5 @@ def main():
 		print(space, end='')
 		print(": Located at {0} addr".format(x[0][-4:] ))
 
-main()
+if __name__ == '__main__':
+	main()
