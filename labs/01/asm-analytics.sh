@@ -11,8 +11,7 @@ while read line
 do
         if [[ $line =~ $func_regex ]]; then
                 if [[ ! -v functions[${BASH_REMATCH[2]}] ]]; then
-                        echo "${BASH_REMATCH[1]}"
-                        functions[${BASH_REMATCH[2]}]=${BASH_REMATCH[1]}
+                         functions[${BASH_REMATCH[2]}]=${BASH_REMATCH[1]}
                 fi
         elif [[ $line =~ $instr_regex ]]; then
                 if [[ -v instructions[${BASH_REMATCH[2]}] ]]; then
