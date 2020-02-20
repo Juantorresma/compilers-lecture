@@ -5,11 +5,9 @@
 import sys
 
 def main():
-
-  print("Hi, this is the output of the analysis: ")
-
+	print("Hi, this is the output of the analysis: ")
 	funcs = []
-  scriptRoute =  sys.argv[1]
+	scriptRoute =  sys.argv[1]
 	command = {}
   
 	with open(scriptRoute) as file:
