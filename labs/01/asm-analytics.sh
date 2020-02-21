@@ -24,7 +24,7 @@ def asmAnalytics(file):
         addr = [i.strip() for i in addr_regex.findall(lines)]
         
 #we now have to count the number of functions and of the differnet kind of intructions
-        instr_count = len([[x,instructions.count(x)] for x in set(instructions)])
+        instr_count = len([[x,instr.count(x)] for x in set(instr)])
         func_count=len(func)
   
 #now we just print what we have
