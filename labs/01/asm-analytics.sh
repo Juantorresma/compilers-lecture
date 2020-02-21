@@ -1,5 +1,3 @@
-#!/usr/bin/python3
-#!/usr/bin/pip3
 
 # Homework 01
 # A01227885
@@ -34,7 +32,7 @@ def asmAnalytics(file):
             print("\t\t",x[0], "\t: Executed ", x[1], " times")
  
         print("\tYou have ", func_count, " functions:")
-        for x,y in zip(functions,address):
+        for x,y in zip(func,addr):
                 print("\t\t",x,"\t: Located at ",y," addr")
 
         
