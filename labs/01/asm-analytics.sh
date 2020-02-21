@@ -6,8 +6,8 @@ import sys
 import re
 
 #Declaring the func, instr and addr regular expressions
-instr_regex = re.compile(r'<.+>:')
-func_regex = re.compile(r' \t[a-z]+[0-9]*[a-z]* [a-z]+[0-9]*[a-z]*\s' '| \t[a-z]+[0-9]*[a-z]*\s')
+instr_regex = re.compile(r' \t[a-z]+[0-9]*[a-z]* [a-z]+[0-9]*[a-z]*\s' '| \t[a-z]+[0-9]*[a-z]*\s')
+func_regex = re.compile(r'<.+>:')
 addr_regex = re.compile(r'[0-9a-fA-F]{16} ')
 
 #we have to read all the lines in our objdump, so we create the function asmAnalytics receiving the file
