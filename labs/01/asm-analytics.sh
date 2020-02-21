@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+#!/usr/bin/pip3
 
 # Homework 01
 # A01227885
