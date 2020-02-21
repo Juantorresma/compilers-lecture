@@ -25,11 +25,12 @@ def asmAnalytics(file):
         
 #we now have to count the number of functions and of the differnet kind of intructions
         instr_count = len([[x,instr.count(x)] for x in set(instr)])
+        diff_instr = [[x,instr.count(x)] for x in set(instr)]
         func_count=len(func)
   
 #now we just print what we have
         print("Hi, this is the output of the analysis:","\n\tYou have " , instr_count," kind of instructions in this object file:")
-        for x in instr_count:
+        for x in diff_instr:
             print("\t\t",x[0], "\t: Executed ", x[1], " times")
  
         print("\tYou have ", func_count, " functions:")
