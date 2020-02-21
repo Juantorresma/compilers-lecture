@@ -28,8 +28,8 @@ def asmAnalytics(file):
         func_count=len(func)
   
 #now we just print what we have
-        print("Hi, this is the output of the analysis:","\n\tYou have " , inst_count," kind of instructions in this object file:")
-        for x in inst_count:
+        print("Hi, this is the output of the analysis:","\n\tYou have " , instr_count," kind of instructions in this object file:")
+        for x in instr_count:
             print("\t\t",x[0], "\t: Executed ", x[1], " times")
  
         print("\tYou have ", func_count, " functions:")
