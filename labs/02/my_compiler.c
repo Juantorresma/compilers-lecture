@@ -71,7 +71,7 @@ void desbalanceado(){
 		}
 	}
 	if (!errores)
-		printf("There is no errores.\n");
+		printf("There is no errors.\n");
 }
 
 
