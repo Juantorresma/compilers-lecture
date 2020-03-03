@@ -1,5 +1,5 @@
 all:
-	gcc simple_foo.c -o simple_foo
+	gcc my_compiler.c -o my_compiler
 
 clean:
-	rm -rf simple_foo
+	rm -rf my_compiler
