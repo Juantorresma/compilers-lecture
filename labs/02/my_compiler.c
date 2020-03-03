@@ -4,7 +4,6 @@
 FILE *archivo;
 int espacios, linea, bandera_esp, bandera_com, bandera_mul_com;
 int contador = 0;
-struct datos recibido[30000];
 int lineas[30000];
 char caracteres[8] = {'{', '}', '(', ')' , '[', ']', '\'', '\"'};
 
@@ -13,6 +12,8 @@ struct datos{
 	int linea;
 	int indentacion;
 };
+
+struct datos recibido[30000];
 
 char valor_desbalanceado(char val){
 	switch (val){
@@ -26,6 +27,22 @@ char valor_desbalanceado(char val){
 		case '\'': return '\'';
 		default: return ' ';
 	}
+}
+
+int contiene(char val, char *arr, int start, int end){
+	for (int i = start; i < end; i++)
+		if (arr[i] == val)
+			return 1;
+		return 0;
+}
+
+int comparar(char val1, char val2){
+	if (val1 == '(' && val2 == ')') return 1;
+	else if (val1 == '[' && val2 == ']') return 1;
+	else if (val1 == '{' && val2 == '}') return 1;
+	else if (val1 == '\"' && val2 == '\"') return 1;
+	else if (val1 == '\'' && val2 == '\'') return 1;
+	return 0;
 }
 
 void desbalanceado(){
@@ -77,14 +94,7 @@ void checar_si_balanceados(){
 }
 
 
-int comparar(char val1, char val2){
-	if (val1 == '(' && val2 == ')') return 1;
-	else if (val1 == '[' && val2 == ']') return 1;
-	else if (val1 == '{' && val2 == '}') return 1;
-	else if (val1 == '\"' && val2 == '\"') return 1;
-	else if (val1 == '\'' && val2 == '\'') return 1;
-	return 0;
-}
+
 
 
 void buscar_valores(char val, int l, int s){
@@ -94,12 +104,7 @@ void buscar_valores(char val, int l, int s){
 }
 
 
-int contiene(char val, char *arr, int start, int end){
-	for (int i = start; i < end; i++)
-		if (arr[i] == val)
-			return 1;
-		return 0;
-}
+
 
 int main(int argc, char *argv[]){
 	if (argc != 2){
