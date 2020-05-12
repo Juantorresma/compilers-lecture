@@ -8,7 +8,7 @@
 
 int calculator(int n, char * input, char *output,int * indexA);
 
-int operaciones(int n, char *input)
+int operaciones(int n, char *input);
 
 int calculator(int n, char * input, char *output,int * indexA){
     (*indexA)=0;
