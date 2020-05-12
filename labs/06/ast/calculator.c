@@ -6,12 +6,12 @@
 
 /*Primero declaramos los headers de las funciones*/
 
-int calculator(int n, char * input, char *output,int * index);
+int calculator(int n, char * input, char *output,int * indexA);
 
 int operaciones(int n, char *input)
 
-int calculator(int n, char * input, char *output,int * index){
-    (*index)=0;
+int calculator(int n, char * input, char *output,int * indexA){
+    (*indexA)=0;
     int digitos=0;
     int *stk = malloc(n*sizeof(char));
     int sIndx=0;
@@ -35,7 +35,7 @@ int calculator(int n, char * input, char *output,int * index){
                     stk[sIndx++] = c;
                     break; 
                 }else{
-                    output[(*index)++]=stk[--sIndx];
+                    output[(*indexA)++]=stk[--sIndx];
                 }
             }     
             break;
@@ -51,7 +51,7 @@ int calculator(int n, char * input, char *output,int * index){
                 if( sIndx==0) return -1;
                 char op = stk[--sIndx]; 
                 if(op=='(') break;
-                output[(*index)++]=op;
+                output[(*indexA)++]=op;
                 
             }   
             break;
@@ -59,7 +59,7 @@ int calculator(int n, char * input, char *output,int * index){
             if(c==' ' || c=='\t') continue;
             if(c<'0' || c>'9') return -1;
             if(digitos) return -1;
-            output[(*index)++]=c;
+            output[(*indexA)++]=c;
             digitos++;
             break;
         }
@@ -67,7 +67,7 @@ int calculator(int n, char * input, char *output,int * index){
     while(sIndx>0) {
 		char op = stk[--(sIndx)];
 		if(op=='(') return -1;
-		output[(*index)++] = op;
+		output[(*indexA)++] = op;
 	}
 	return 0;
 }
