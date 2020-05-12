@@ -15,19 +15,19 @@ int operaciones(int n, char *input);
 int operaciones(int n, char *input){
 	
     short usados[256];
+    int *indice = malloc(n*sizeof(char));
+    int indexB=0;
+    int actual=0;
     for(int i=0;i<256;i++){
 	    usados[i] = 0; 
     }
-    int *indice = malloc(n*sizeof(char));
-    int indexB=0;
-    int currentReg=0;
     for (int i=0;i<n; i++){
-        char c=input[i];
-        if(c>='0' && c<='9'){
-            indice[indexB++] = c-'0';
+        char caracter=input[i];
+        if(caracter>='0' && caracter<='9'){
+            indice[indexB++] = caracter-'0';
         }else{
             char *operation;
-            switch (c)
+            switch (caracter)
             {
             case '+':
                 operation="add";
@@ -64,22 +64,22 @@ int operaciones(int n, char *input){
                 if(usados[s] == 0){
                     indice[indexB++] = 10+s;
                     usados[s] = 1;
-                    currentReg=s;
+                    actual=s;
                     break;
                 }
             }
             if(val2>=10){
                 
                 if(val1>=10){
-                    printf("%s &%s%d, &%s%d, %s%d\n", operation, v1,val1-10, v2,val2-10, acc,currentReg);
+                    printf("%s &%s%d, &%s%d, %s%d\n", operation, v1,val1-10, v2,val2-10, acc,actual);
                 }else{
-                    printf("%s %s, &%s%d, %s%d\n", operation, v1, v2,val2-10, acc,currentReg);
+                    printf("%s %s, &%s%d, %s%d\n", operation, v1, v2,val2-10, acc,actual);
                 }
             }else{
                 if(val1>=10){
-                    printf("%s &%s%d, %s, %s%d\n", operation,  v1,val1-10,v2, acc,currentReg);
+                    printf("%s &%s%d, %s, %s%d\n", operation,  v1,val1-10,v2, acc,actual);
                 }else{
-                    printf("%s %s, %s, %s%d\n", operation, v1, v2, acc, currentReg);
+                    printf("%s %s, %s, %s%d\n", operation, v1, v2, acc, actual);
                 }
             }
         }
