@@ -89,8 +89,8 @@ int operaciones(int n, char *input){
 int calculator(int n, char * input, char *output,int * indexA){
     (*indexA)=0;
     int digitos=0;
-    int *stk = malloc(n*sizeof(char));
-    int sIndx=0;
+    int *indice = malloc(n*sizeof(char));
+    int indexB=0;
     int done=0;
     for(int i=0;i<n;i++){
         if(done) break;
@@ -107,25 +107,25 @@ int calculator(int n, char * input, char *output,int * indexA){
         case '-':
             digitos=0;
             while (1){
-                if( sIndx==0 || stk[sIndx-1] == '('){
-                    stk[sIndx++] = c;
+                if( indexB==0 || indice[indexB-1] == '('){
+                    indice[indexB++] = c;
                     break; 
                 }else{
-                    output[(*indexA)++]=stk[--sIndx];
+                    output[(*indexA)++]=indice[--indexB];
                 }
             }     
             break;
         case '*':
         case '(':
             digitos=0;
-            stk[sIndx++] = c;
+            indice[indexB++] = c;
             break;
         case ')':
             digitos=0;
             while (1){
                 
-                if( sIndx==0) return -1;
-                char op = stk[--sIndx]; 
+                if( indexB==0) return -1;
+                char op = indice[--indexB]; 
                 if(op=='(') break;
                 output[(*indexA)++]=op;
                 
@@ -140,8 +140,8 @@ int calculator(int n, char * input, char *output,int * indexA){
             break;
         }
     }
-    while(sIndx>0) {
-		char op = stk[--(sIndx)];
+    while(indexB>0) {
+		char op = indice[--(indexB)];
 		if(op=='(') return -1;
 		output[(*indexA)++] = op;
 	}
@@ -152,13 +152,13 @@ int calculator(int n, char * input, char *output,int * indexA){
 
 int main(int argc, char ** argv){
     if(argc!=2){
-        printf("Incorrect number of arguments. Please add the file path to analyze. Aborting\n");
+        printf("Favor de verificarl el numero de argumentos.\n");
         return -1;
     }
     FILE *fd;
     fd = fopen(argv[1], "r");
     if(fd==NULL){
-        printf("File doesn't exist. Aborting\n");
+        printf("Hubo un error al abrir el archivo. \n");
         return -1;
     }
     char line[1024];
@@ -176,7 +176,7 @@ int main(int argc, char ** argv){
             }printf("\n\n");
             operaciones(index,output);
         }else{
-            printf("There is a sintax error in the sentence.\n");
+            printf("Hay un error sintactico.\n");
         }
         printf("\n");
     }
