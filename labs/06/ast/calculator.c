@@ -10,6 +10,82 @@ int calculator(int n, char * input, char *output,int * indexA);
 
 int operaciones(int n, char *input);
 
+/*Ya definidas las desarrollamos*/
+
+int operaciones(int n, char *input){
+	
+    short usados[256];
+    for(int i=0;i<256;i++){
+	    usados[i] = 0; 
+    }
+    int *indice = malloc(n*sizeof(char));
+    int indexB=0;
+    int currentReg=0;
+    for (int i=0;i<n; i++){
+        char c=input[i];
+        if(c>='0' && c<='9'){
+            indice[indexB++] = c-'0';
+        }else{
+            char *operation;
+            switch (c)
+            {
+            case '+':
+                operation="add";
+                break;
+            case '-':
+                operation="sub";
+                break;
+            default:
+                operation="mul";
+                break;
+            }
+            int val2=  indice[--indexB];
+            int val1 = indice[--indexB];
+            char * v2,*v1;
+            char* acc="accm";
+            if(val2>=10){
+                 v2= acc;
+                 usados[val2-10] =0;
+            }else{
+                v2 = (char *)malloc(sizeof(char) *2 );
+                v2[0]= ((char)(val2+'0'));
+                v2[1]= 0;
+            }
+            if(val1>=10){
+                 v1= acc;
+                 usados[val1-10] =0;
+            }else{
+                v1 = (char *)malloc(sizeof(char) *2 );
+                v1[0]= ((char)(val1+'0'));
+                v1[1]= 0;
+            }
+
+            for(int s=0;s<256;s++){ 
+                if(usados[s] == 0){
+                    indice[indexB++] = 10+s;
+                    usados[s] = 1;
+                    currentReg=s;
+                    break;
+                }
+            }
+            if(val2>=10){
+                
+                if(val1>=10){
+                    printf("%s &%s%d, &%s%d, %s%d\n", operation, v1,val1-10, v2,val2-10, acc,currentReg);
+                }else{
+                    printf("%s %s, &%s%d, %s%d\n", operation, v1, v2,val2-10, acc,currentReg);
+                }
+            }else{
+                if(val1>=10){
+                    printf("%s &%s%d, %s, %s%d\n", operation,  v1,val1-10,v2, acc,currentReg);
+                }else{
+                    printf("%s %s, %s, %s%d\n", operation, v1, v2, acc, currentReg);
+                }
+            }
+        }
+    }
+}
+
 int calculator(int n, char * input, char *output,int * indexA){
     (*indexA)=0;
     int digitos=0;
@@ -72,76 +148,7 @@ int calculator(int n, char * input, char *output,int * indexA){
 	return 0;
 }
 
-int operaciones(int n, char *input){
-    short regUsed[256];
-    for(int s=0;s<256;s++){ regUsed[s] = 0; }
-    int *stk = malloc(n*sizeof(char));
-    int sIndx=0;
-    int currentReg=0;
-    for (int i=0;i<n; i++){
-        char c=input[i];
-        if(c>='0' && c<='9'){
-            stk[sIndx++] = c-'0';
-        }else{
-            char *operation;
-            switch (c)
-            {
-            case '+':
-                operation="add";
-                break;
-            case '-':
-                operation="sub";
-                break;
-            default:
-                operation="mul";
-                break;
-            }
-            int val2=  stk[--sIndx];
-            int val1 = stk[--sIndx];
-            char * v2,*v1;
-            char* acc="accm";
-            if(val2>=10){
-                 v2= acc;
-                 regUsed[val2-10] =0;
-            }else{
-                v2 = (char *)malloc(sizeof(char) *2 );
-                v2[0]= ((char)(val2+'0'));
-                v2[1]= 0;
-            }
-            if(val1>=10){
-                 v1= acc;
-                 regUsed[val1-10] =0;
-            }else{
-                v1 = (char *)malloc(sizeof(char) *2 );
-                v1[0]= ((char)(val1+'0'));
-                v1[1]= 0;
-            }
 
-            for(int s=0;s<256;s++){ 
-                if(regUsed[s] == 0){
-                    stk[sIndx++] = 10+s;
-                    regUsed[s] = 1;
-                    currentReg=s;
-                    break;
-                }
-            }
-            if(val2>=10){
-                
-                if(val1>=10){
-                    printf("%s &%s%d, &%s%d, %s%d\n", operation, v1,val1-10, v2,val2-10, acc,currentReg);
-                }else{
-                    printf("%s %s, &%s%d, %s%d\n", operation, v1, v2,val2-10, acc,currentReg);
-                }
-            }else{
-                if(val1>=10){
-                    printf("%s &%s%d, %s, %s%d\n", operation,  v1,val1-10,v2, acc,currentReg);
-                }else{
-                    printf("%s %s, %s, %s%d\n", operation, v1, v2, acc, currentReg);
-                }
-            }
-        }
-    }
-}
 
 int main(int argc, char ** argv){
     if(argc!=2){
