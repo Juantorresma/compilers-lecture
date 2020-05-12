@@ -42,7 +42,7 @@ int operaciones(int n, char *input){
             int val2=  indice[--indexB];
             int val1 = indice[--indexB];
             char * v2,*v1;
-            char* acc="accm";
+            char* acc="acum";
             if(val2>=10){
                  v2= acc;
                  usados[val2-10] =0;
